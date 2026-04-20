@@ -1,0 +1,113 @@
+CHARACTER REPETITION USING MULTIPLE APPROACHES
+
+
+public class Example {
+
+    public static void main(String[] args) {
+
+        if (args.length < 2) {
+            System.out.println("Error: Please provide exactly 2 arguments -> char and string");
+            return;
+        }
+
+        if (args.length > 2) {
+            System.out.println("Warning: Extra arguments detected. Skipping excess arguments...");
+        }
+
+        String firstArg = args[0];
+        String inputString = args[1];
+
+        if (firstArg.length() != 1) {
+            System.out.println("Error: First argument must be a single character.");
+            return;
+        }
+
+        char ch = firstArg.charAt(0);
+
+        System.out.println("\n--- Approach 1: Using Loop ---");
+        repeatUsingLoop(ch, inputString);
+
+        System.out.println("\n--- Approach 2: Using replace() ---");
+        repeatUsingReplace(ch, inputString);
+
+        System.out.println("\n--- Approach 3: Using StringBuilder ---");
+        repeatUsingBuilder(ch, inputString);
+    }
+
+    public static void repeatUsingLoop(char ch, String str) {
+        for (char c : str.toCharArray()) {
+            if (c == ch) {
+                System.out.print("" + c + c); 
+            } else {
+                System.out.print(c);
+            }
+        }
+        System.out.println();
+    }
+
+    public static void repeatUsingReplace(char ch, String str) {
+        String result = str.replace(
+                Character.toString(ch),
+                Character.toString(ch) + ch
+        );
+        System.out.println(result);
+    }
+
+    public static void repeatUsingBuilder(char ch, String str) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            char current = str.charAt(i);
+            sb.append(current);
+
+            if (current == ch) {
+                sb.append(ch);
+            }
+        }
+
+        System.out.println(sb.toString());
+    }
+}
+
+
+
+
+IMPLEMENTATION PROGRAM
+
+
+public class VarargsDemo {
+
+    public static void show(int... numbers) {
+        System.out.println("Numbers:");
+        for (int n : numbers) {
+            System.out.print(n + " ");
+        }
+        System.out.println();
+    }
+
+    public static void fun(String... s) {
+        System.out.println("String varargs");
+    }
+
+    public static void fun(int... i) {
+        System.out.println("Int varargs");
+    }
+
+    public static void display(String name, int... marks) {
+        System.out.println("Name: " + name);
+        for (int m : marks) {
+            System.out.print(m + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        show(1, 2, 3, 4);
+
+        fun(new String[]{"A", "B"});
+        fun(new int[]{1, 2});
+
+        display("John", 90, 85, 88);
+    }
+}
